@@ -28,6 +28,7 @@ class Whitelist(commands.Cog):
                     await ctx.send(f"||<@&{nowhitelist}>||", file=discord.File(io.BytesIO(image), filename="whitelist_ouverte.png"))
                 else:
                     await ctx.send("Impossible de récupérer l'image.")
+        await message.delete(delay=5)
 
     @commands.command()
     @commands.has_role(DOUANIER)
@@ -48,6 +49,7 @@ class Whitelist(commands.Cog):
                     await ctx.send(f"||<@&{nowhitelist}>||", file=discord.File(io.BytesIO(image), filename="whitelist_fermee.png"))
                 else:
                     await ctx.send("Impossible de récupérer l'image.")
+        await message.delete(delay=5)
 
 # Setup de la cog
 async def setup(bot):
