@@ -1,8 +1,6 @@
 import discord
 from discord.ext import commands
 from config import GUILD_ID, LEAVE_CHANNEL_ID
-from datetime import datetime
-import pytz
 
 class MemberLeave(commands.Cog):
     def __init__(self, bot):
@@ -15,7 +13,6 @@ class MemberLeave(commands.Cog):
         
         log_channel = self.bot.get_channel(LEAVE_CHANNEL_ID)
         if log_channel:
-            now_paris = datetime.now(pytz.utc).astimezone(pytz.timezone('Europe/Paris'))
             embed = discord.Embed(
                 title="👤 Un membre a quitté",
                 description=f"Un utilisateur a quitté le serveur.",
@@ -29,7 +26,6 @@ class MemberLeave(commands.Cog):
             embed.add_field(name="Nom d'utilisateur", value=member.name, inline=False)
             embed.add_field(name="Pseudo sur le serveur", value=member.display_name, inline=False)
             embed.add_field(name="Création du compte", value=member.created_at.strftime('%d/%m/%Y à %H:%M:%S'), inline=False)
-            embed.add_field(name="Date de départ du joueur", value=now_paris.strftime('%d/%m/%Y à %H:%M:%S'), inline=False)
             embed.add_field(name="Discord du joueur", value=member.mention, inline=False)
             embed.add_field(name="Admin", value="✅ Oui" if member.guild_permissions.administrator else "❌ Non", inline=False)
             embed.add_field(name="Lien du profil", value=f"[Clique ici](https://discord.com/users/{member.id})", inline=False)
