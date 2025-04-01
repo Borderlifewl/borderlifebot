@@ -13,7 +13,7 @@ class Whitelist(commands.Cog):
     @commands.has_role(DOUANIER)
     async def openwl(self, ctx):
         nowhitelist = 1342864805559533659
-        if ctx.channel.id != 1356642624370639040:
+        if ctx.channel.id != 1342859770893172788:
             await ctx.send("Cette commande peut uniquement être exécutée dans un canal spécifique.", delete_after=5)
             return
         guild = ctx.guild
@@ -34,7 +34,7 @@ class Whitelist(commands.Cog):
     @commands.has_role(DOUANIER)
     async def closewl(self, ctx):
         nowhitelist = 1342864805559533659
-        if ctx.channel.id != 1356642624370639040:
+        if ctx.channel.id != 1342859770893172788:
             await ctx.send("Cette commande peut uniquement être exécutée dans un canal spécifique.", delete_after=5)
             return
         guild = ctx.guild
