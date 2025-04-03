@@ -46,6 +46,11 @@ TICKET_ROLE_ID = 1342561376975196260  # Remplacez par l'ID du rôle staff
 MAX_TICKETS = 6  # Nombre maximum de tickets par utilisateur
 LOG_TICKET_CHANNEL_ID = 1345110925723570277  # Remplace par l'ID du canal de logs
 TICKET_NAMES_FILE = "old_ticket_names.json"
-CATEGORY_LEGAL_MAPPINGS = ["・BorderLife Bot", "・Owner", "・Perm ++", "・Manager", "・Discord Dev", "・Legal Manager"]
-CATEGORY_ILLEGAL_MAPPINGS = ["・BorderLife Bot", "・Owner", "・Perm ++", "・Manager", "・Discord Dev", "・Illegal Manager"]
-CATEGORY_STAFF_MAPPINGS = ["・BorderLife Bot", "・Owner", "・Perm ++", "・Manager", "・Discord Dev", "・Staff Manager"]
+ROLES_AUTORISES_RESET_TICKETS = ["・BorderLife Bot", "・Owner", "・Perm ++", "・Manager", "・Discord Dev", "・Staff Manager", "・Developer"]
+
+# Convocations
+ROLES_CONVOCATIONS_ID = 1357332996021293156
+CATEGORY_CONVOCATIONS_MAPPINGS = {
+    "Convocations": 1357005140934131876
+}
+MAX_CONVOCATIONS = 30
