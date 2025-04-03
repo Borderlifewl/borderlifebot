@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from discord.ui import View, Select, Modal, TextInput, Button
-from config import LOG_TICKET_CHANNEL_ID, CATEGORY_MAPPINGS, MAX_TICKETS, TICKET_ROLE_ID, CATEGORY_LEGAL_MAPPINGS, CATEGORY_ILLEGAL_MAPPINGS, CATEGORY_STAFF_MAPPINGS
+from config import LOG_TICKET_CHANNEL_ID, CATEGORY_MAPPINGS, MAX_TICKETS, TICKET_ROLE_ID, STAFF_MANAGER, ILLEGAL_MANAGER, LEGAL_MANAGER, OWNER, PERM_3, MANAGER, ROLES_AUTORISES_RESET_TICKETS
 import sqlite3
 import os
 
@@ -109,13 +109,13 @@ class TicketReasonModal(Modal, title="Raison du ticket"):
         if self.category == "Besoin d'aide":
             allowed_roles = [TICKET_ROLE_ID]
         elif self.category == "Reprise Entreprise":
-            allowed_roles = [CATEGORY_LEGAL_MAPPINGS]
+            allowed_roles = [LEGAL_MANAGER, OWNER, PERM_3, MANAGER]
         elif self.category == "Reprise Groupe Criminel":
-            allowed_roles = [CATEGORY_ILLEGAL_MAPPINGS]
+            allowed_roles = [ILLEGAL_MANAGER, OWNER, PERM_3, MANAGER]
         elif self.category == "Glitch/Bug":
             allowed_roles = [TICKET_ROLE_ID]
         elif self.category == "Recrutement Staff":
-            allowed_roles = [CATEGORY_STAFF_MAPPINGS]    
+            allowed_roles = [STAFF_MANAGER, MANAGER, OWNER, PERM_3]    
         elif self.category == "Demande de Wype":
             allowed_roles = [TICKET_ROLE_ID]
         elif self.category == "Dossier Mort RP":
@@ -132,9 +132,9 @@ class TicketReasonModal(Modal, title="Raison du ticket"):
         ticket_type = self.category
         if ticket_type == "Besoin d'aide":
             embed = discord.Embed(
-            title="Ticket Ouvert",
-            description=f"{interaction.user.mention} a ouvert un ticket dans la catégorie **{self.category}**.",
-            color=discord.Color.purple()
+            title="<:ticket:1349849004837572608> **- Ticket Ouvert**",
+            description=f"Merci de suivre les instructions si dessous.",
+            color=discord.Color.from_rgb(88, 20, 147)
             )
             embed.set_thumbnail(url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
             embed.add_field(
@@ -148,9 +148,9 @@ class TicketReasonModal(Modal, title="Raison du ticket"):
             embed.set_footer(text="Merci de patienter, un membre du staff vous répondra rapidement !", icon_url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
         elif ticket_type == "Reprise Entreprise":
             embed = discord.Embed(
-            title="Ticket Ouvert",
-            description=f"{interaction.user.mention} a ouvert un ticket dans la catégorie **{self.category}**.",
-            color=discord.Color.purple()
+            title="<:ticket:1349849004837572608> **- Ticket Ouvert**",
+            description=f"Merci de suivre les instructions si dessous.",
+            color=discord.Color.from_rgb(88, 20, 147)
             )
             embed.set_thumbnail(url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
             embed.add_field(
@@ -170,9 +170,9 @@ class TicketReasonModal(Modal, title="Raison du ticket"):
             embed.set_footer(text="Merci de patienter, un membre du staff vous répondra rapidement !", icon_url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
         elif ticket_type == "Reprise Groupe Criminel":
             embed = discord.Embed(
-            title="Ticket Ouvert",
-            description=f"{interaction.user.mention} a ouvert un ticket dans la catégorie **{self.category}**.",
-            color=discord.Color.purple()
+            title="<:ticket:1349849004837572608> **- Ticket Ouvert**",
+            description=f"Merci de suivre les instructions si dessous.",
+            color=discord.Color.from_rgb(88, 20, 147)
             )
             embed.set_thumbnail(url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
             embed.add_field(
@@ -192,9 +192,9 @@ class TicketReasonModal(Modal, title="Raison du ticket"):
             embed.set_footer(text="Merci de patienter, un membre du staff vous répondra rapidement !", icon_url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
         elif ticket_type == "Glitch/Bug":
             embed = discord.Embed(
-            title="Ticket Ouvert",
-            description=f"{interaction.user.mention} a ouvert un ticket dans la catégorie **{self.category}**.",
-            color=discord.Color.purple()
+            title="<:ticket:1349849004837572608> **- Ticket Ouvert**",
+            description=f"Merci de suivre les instructions si dessous.",
+            color=discord.Color.from_rgb(88, 20, 147)
             )
             embed.set_thumbnail(url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
             embed.add_field(
@@ -208,9 +208,9 @@ class TicketReasonModal(Modal, title="Raison du ticket"):
             embed.set_footer(text="Merci de patienter, un membre du staff vous répondra rapidement !", icon_url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
         elif ticket_type == "Recrutement Staff":
             embed = discord.Embed(
-            title="Ticket Ouvert",
-            description=f"{interaction.user.mention} a ouvert un ticket dans la catégorie **{self.category}**.",
-            color=discord.Color.purple()
+            title="<:ticket:1349849004837572608> **- Ticket Ouvert**",
+            description=f"Merci de suivre les instructions si dessous.",
+            color=discord.Color.from_rgb(88, 20, 147)
             )
             embed.set_thumbnail(url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
             embed.add_field(
@@ -229,9 +229,9 @@ class TicketReasonModal(Modal, title="Raison du ticket"):
             embed.set_footer(text="Merci de patienter, un membre du staff vous répondra rapidement !", icon_url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
         elif ticket_type == "Demande de Wype":
             embed = discord.Embed(
-            title="Ticket Ouvert",
-            description=f"{interaction.user.mention} a ouvert un ticket dans la catégorie **{self.category}**.",
-            color=discord.Color.purple()
+            title="<:ticket:1349849004837572608> **- Ticket Ouvert**",
+            description=f"Merci de suivre les instructions si dessous.",
+            color=discord.Color.from_rgb(88, 20, 147)
             )
             embed.set_thumbnail(url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
             embed.add_field(
@@ -247,9 +247,9 @@ class TicketReasonModal(Modal, title="Raison du ticket"):
             embed.set_footer(text="Merci de patienter, un membre du staff vous répondra rapidement !", icon_url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
         elif ticket_type == "Dossier Mort RP":
             embed = discord.Embed(
-            title="Ticket Ouvert",
-            description=f"{interaction.user.mention} a ouvert un ticket dans la catégorie **{self.category}**.",
-            color=discord.Color.purple()
+            title="<:ticket:1349849004837572608> **- Ticket Ouvert**",
+            description=f"Merci de suivre les instructions si dessous.",
+            color=discord.Color.from_rgb(88, 20, 147)
             )
             embed.set_thumbnail(url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
             embed.add_field(
@@ -263,7 +263,7 @@ class TicketReasonModal(Modal, title="Raison du ticket"):
                 inline=False
             )
             embed.add_field(
-                name="🚨  Attention, sans raison ou sans preuve, le dossier se fera\n" 
+                name="<a:informationbl2:1344049716765134878>  Attention, sans raison ou sans preuve, le dossier se fera\n" 
                      "        immédiatement refuser", 
                 value="** **", 
                 inline=False
@@ -328,25 +328,25 @@ class Tickets(commands.Cog):
     @commands.has_permissions(administrator=True)
     async def panel(self, ctx):
         embed = discord.Embed(
-            title="Ouvrir un Ticket",
+            title="<:borderlife:1344046660463890504> - Ouvrir un Ticket",
             description="Sélectionnez une option ci-dessous pour ouvrir un ticket. Un membre de l'équipe staff vous contactera rapidement.",
             color=discord.Color.purple()
         )
         embed.set_thumbnail(url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
         embed.add_field(
-            name="📌 Comment ça fonctionne",
+            name="<:purplepin:1345831132226388090> **- Comment ça fonctionne**",
             value="Choisissez l'option qui correspond à votre besoin. Un ticket sera créé dans la catégorie appropriée, et un membre de notre staff interviendra rapidement.",
             inline=False
         )
         embed.add_field(
-            name="💡 Options de tickets",
-            value="1. **Besoin d'aide** ➜ Pour toute question ou problème.\n"
-                  "2. **Reprise Entreprise** ➜ Pour récupérer une entreprise.\n"
-                  "3. **Reprise Groupe Criminel** ➜ Pour récupérer un groupe criminel.\n"
-                  "4. **Glitch/Bug** ➜ Si vous rencontrez/découvrez un Bug ou un Glitch.\n"
-                  "5. **Recrutement Staff** ➜ Si vous souhaitez rejoindre l'équipe staff du serveur.\n"
-                  "6. **Demande de Wype** ➜ Si vous souhaitez vous faire wype.\n"
-                  "7. **Dossier de Mort RP** ➜ Si vous souhaitez déposer un dossier de mort RP",
+            name="<:ticket:1349849004837572608> **- Options de tickets**",
+            value="<a:purplearrow:1345827190541123675> **Besoin d'aide** ➜ Pour toute question ou problème.\n"
+                  "<a:purplearrow:1345827190541123675> **Reprise Entreprise** ➜ Pour récupérer une entreprise.\n"
+                  "<a:purplearrow:1345827190541123675> **Reprise Groupe Criminel** ➜ Pour récupérer un groupe criminel.\n"
+                  "<a:purplearrow:1345827190541123675> **Glitch/Bug** ➜ Si vous rencontrez/découvrez un Bug ou un Glitch.\n"
+                  "<a:purplearrow:1345827190541123675> **Recrutement Staff** ➜ Si vous souhaitez rejoindre l'équipe staff du serveur.\n"
+                  "<a:purplearrow:1345827190541123675> **Demande de Wype** ➜ Si vous souhaitez vous faire wype.\n"
+                  "<a:purplearrow:1345827190541123675> **Dossier de Mort RP** ➜ Si vous souhaitez déposer un dossier de mort RP",
             inline=False
         )
         embed.set_footer(text="Nous sommes là pour vous aider !", icon_url="https://www.dropbox.com/scl/fi/aeb93t3low78cezb3eip4/Logo2.png?rlkey=og0puob6i1ner9jszous6txg4&st=lteug4o8&dl=0&raw=1")
@@ -356,7 +356,7 @@ class Tickets(commands.Cog):
     @commands.command()
     @commands.has_role(TICKET_ROLE_ID)
     async def ticket_add(self, ctx, member: discord.Member):
-        if ctx.channel.name.startswith("ticket-"):
+        if ctx.channel.name.startswith("ticket-") or ctx.channel.name.startswith("bda-") or ctx.channel.name.startswith("re-") or ctx.channel.name.startswith("rgc-") or ctx.channel.name.startswith("gb-") or ctx.channel.name.startswith("rs-") or ctx.channel.name.startswith("dw-") or ctx.channel.name.startswith("mrp-") or ctx.channel.id in self.old_ticket_names:
             await ctx.channel.set_permissions(member, read_messages=True, send_messages=True)
             await ctx.send(f"{member.mention} a été ajouté au ticket.")
         else:
@@ -364,23 +364,32 @@ class Tickets(commands.Cog):
 
     @commands.command()
     @commands.has_role(TICKET_ROLE_ID)
-    async def ticket_rem(self, ctx, member: discord.Member):
-        if ctx.channel.name.startswith("ticket-"):
+    async def ticket_remove(self, ctx, member: discord.Member):
+        if ctx.channel.name.startswith("ticket-") or ctx.channel.name.startswith("bda-") or ctx.channel.name.startswith("re-") or ctx.channel.name.startswith("rgc-") or ctx.channel.name.startswith("gb-") or ctx.channel.name.startswith("rs-") or ctx.channel.name.startswith("dw-") or ctx.channel.name.startswith("mrp-") or ctx.channel.id in self.old_ticket_names:
             await ctx.channel.set_permissions(member, overwrite=None)
             await ctx.send(f"{member.mention} a été retiré du ticket.")
         else:
             await ctx.send("Cette commande ne peut être utilisée que dans un ticket.")
 
     @commands.command()
-    @commands.has_permissions(administrator=True)
-    async def ticket_reset(self, ctx, member: discord.Member):
+    @commands.has_any_role(ROLES_AUTORISES_RESET_TICKETS)
+    async def ticket_number_del(self, ctx, member: discord.Member):
+        if member.id in ticket_count and ticket_count[member.id] > 0:
+            ticket_count[member.id] -= 1
+            await ctx.send(f"Un ticket a été retiré à {member.mention}. Le nombre de tickets restants est {ticket_count[member.id]}.")
+        else:
+            await ctx.send(f"{member.mention} n'a pas de tickets ou le nombre est déjà à zéro.")
+    
+    @commands.command()
+    @commands.has_any_role(ROLES_AUTORISES_RESET_TICKETS)
+    async def ticket_number_reset(self, ctx, member: discord.Member):
         ticket_count[member.id] = 0
         await ctx.send(f"Le nombre de tickets de {member.mention} a été remis à zéro.")
 
     @commands.command()
     @commands.has_role(TICKET_ROLE_ID)
     async def ticket_rename(self, ctx, new_name: str):
-        if ctx.channel.name.startswith("ticket-") or ctx.channel.name.startswith("bda-") or ctx.channel.name.startswith("re-") or ctx.channel.name.startswith("rgc-") or ctx.channel.name.startswith("gb-") or ctx.channel.name.startswith("rs-") or ctx.channel.name.startswith("dw-") or ctx.channel.id in self.old_ticket_names:
+        if ctx.channel.name.startswith("ticket-") or ctx.channel.name.startswith("bda-") or ctx.channel.name.startswith("re-") or ctx.channel.name.startswith("rgc-") or ctx.channel.name.startswith("gb-") or ctx.channel.name.startswith("rs-") or ctx.channel.name.startswith("dw-") or ctx.channel.name.startswith("mrp-") or ctx.channel.id in self.old_ticket_names:
             await ctx.channel.edit(name=new_name)
             self.old_ticket_names[ctx.channel.id] = new_name  # Mise à jour de l'historique des anciens noms
             save_old_ticket_name(ctx.channel.id, new_name)  # Sauvegarder dans la DB
