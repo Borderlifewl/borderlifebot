@@ -1,9 +1,8 @@
 import discord
-import aiohttp
-import io
 from discord.ext import commands
 from discord.utils import get
 from config import DOUANIER
+import os
 
 class Whitelist(commands.Cog):
     def __init__(self, bot):
@@ -17,18 +16,18 @@ class Whitelist(commands.Cog):
             await ctx.send("Cette commande peut uniquement être exécutée dans un canal spécifique.", delete_after=5)
             return
         guild = ctx.guild
-        channel = get(guild.text_channels, name="🔴・statut-whitelist")
-        if channel:
+        target_channel_id = 1342859770893172788
+        channel = guild.get_channel(target_channel_id)
+        if channel and isinstance(channel, discord.TextChannel):
             await channel.edit(name="🟢・statut-whitelist")
-        image_wlo_url = "https://www.dropbox.com/scl/fi/gn0xopnfuz0ba2adeoq7u/Whitelist_Ouverte.png?rlkey=o2ymy8c4kp39r3efljdg3aju2&st=vrr17obm&dl=0&raw=1"
-        async with aiohttp.ClientSession() as session:
-            async with session.get(image_wlo_url) as response:
-                if response.status == 200:
-                    image = await response.read()
-                    await ctx.send(f"||<@&{nowhitelist}>||", file=discord.File(io.BytesIO(image), filename="whitelist_ouverte.png"))
-                else:
-                    await ctx.send("Impossible de récupérer l'image.")
-        await message.delete(delay=5)
+        else:
+            await ctx.send("Salon introuvable ou non valide.", delete_after=5)
+            return
+        image_path = os.path.join("images", "Whitelist_Ouverte.png")
+        if os.path.exists(image_path):
+            await ctx.send(f"||<@&{nowhitelist}>||", file=discord.File(image_path))
+        else:
+            await ctx.send("Image non trouvée.")
 
     @commands.command()
     @commands.has_role(DOUANIER)
@@ -38,18 +37,18 @@ class Whitelist(commands.Cog):
             await ctx.send("Cette commande peut uniquement être exécutée dans un canal spécifique.", delete_after=5)
             return
         guild = ctx.guild
-        channel = get(guild.text_channels, name="🟢・statut-whitelist")
-        if channel:
+        target_channel_id = 1342859770893172788
+        channel = guild.get_channel(target_channel_id)
+        if channel and isinstance(channel, discord.TextChannel):
             await channel.edit(name="🔴・statut-whitelist")
-        image_wlf_url = "https://www.dropbox.com/scl/fi/85yw5b3ia57kpk5xk28qe/Whitelist_Ferm.png?rlkey=xl0es5j3gspv2op0cn4olpshv&st=11jg65ar&dl=0&raw=1"
-        async with aiohttp.ClientSession() as session:
-            async with session.get(image_wlf_url) as response:
-                if response.status == 200:
-                    image = await response.read()
-                    await ctx.send(f"||<@&{nowhitelist}>||", file=discord.File(io.BytesIO(image), filename="whitelist_fermee.png"))
-                else:
-                    await ctx.send("Impossible de récupérer l'image.")
-        await message.delete(delay=5)
+        else:
+            await ctx.send("Salon introuvable ou non valide.", delete_after=5)
+            return
+        image_path = os.path.join("images", "Whitelist_Fermé.png")
+        if os.path.exists(image_path):
+            await ctx.send(f"||<@&{nowhitelist}>||", file=discord.File(image_path))
+        else:
+            await ctx.send("Image non trouvée.")
 
 # Setup de la cog
 async def setup(bot):
