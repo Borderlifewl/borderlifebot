@@ -15,6 +15,7 @@ intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 async def load_cogs():
+    await bot.load_extension("cogs.convocations")
     await bot.load_extension("cogs.member_join")
     await bot.load_extension("cogs.moderation")
     await bot.load_extension("cogs.tickets")
