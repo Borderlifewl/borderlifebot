@@ -21,6 +21,7 @@ async def load_cogs():
     await bot.load_extension("cogs.tickets")
     await bot.load_extension("cogs.member_leave")
     await bot.load_extension("cogs.whitelist")
+    await bot.load_extension("cogs.wlrapide")
 
 keep_alive()
 
