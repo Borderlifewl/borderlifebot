@@ -4,14 +4,14 @@ GUILD_ID = 1342524441397166150  # Remplacez par l'ID de votre serveur
 
 
 # Arrivées et Départs
-JOIN_CHANNEL_ID = 1342560479410782259  # Remplace par l'ID du canal staff
-LEAVE_CHANNEL_ID = 1343167661575634974
+JOIN_CHANNEL_ID = 1363157984854802532  # Remplace par l'ID du canal staff
+LEAVE_CHANNEL_ID = 1363175965492248737
 
 
 
 # Moderation
-LOG_MODERATION_CHANNEL_ID = 1346497620117557359
-LOG_WARN_CHANNEL_ID = 1345764042362589226
+LOG_MODERATION_CHANNEL_ID = 1363158221409226853
+LOG_WARN_CHANNEL_ID = 1363158218079080610
 ROLES_AUTORISES = ["・BorderLife Bot", "・Owner", "・Perm ++", "・Staff", "・Manager", "・Perm +", "・Discord Dev", "⚙️", "・Developer"]
 
 STAFF = 1342561371065286667
@@ -34,27 +34,20 @@ DOUANIER = 1342860769406095381
 
 # Tickets Borderlife
 CATEGORY_MAPPINGS = {
-    "Besoin d'aide": 1342556044085297203,  # Remplacez par l'ID de la catégorie
-    "Reprise Entreprise": 1342556148955349119,
-    "Reprise Groupe Criminel": 1342557128631779388,
-    "Glitch/Bug": 1342556224041910354,
-    "Recrutement Staff": 1342556797466054686,
-    "Demande de Wype": 1342556797466054686,
-    "Dossier Mort RP": 1353404737206095952
+    "Besoin d'aide": 1363157952785158315,  # Remplacez par l'ID de la catégorie
+    "Reprise Entreprise": 1363157954437579008,
+    "Reprise Groupe Criminel": 1363157956136403105,
+    "Glitch/Bug": 1363157957193502792,
+    "Recrutement Staff": 1363157958539870321,
+    "Demande de Wype": 1363157960058077304,
+    "Dossier Mort RP": 1363157961417035848
 }
 TICKET_ROLE_ID = 1342561376975196260  # Remplacez par l'ID du rôle staff
-MAX_TICKETS = 6  # Nombre maximum de tickets par utilisateur
-LOG_TICKET_CHANNEL_ID = 1345110925723570277  # Remplace par l'ID du canal de logs
+MAX_TICKETS = 10  # Nombre maximum de tickets par utilisateur
+LOG_TICKET_CHANNEL_ID = 1363158216996950198  # Remplace par l'ID du canal de logs
 TICKET_NAMES_FILE = "old_ticket_names.json"
 ROLES_AUTORISES_RESET_TICKETS = ["・BorderLife Bot", "・Owner", "・Perm ++", "・Manager", "・Discord Dev", "・Staff Manager", "・Developer"]
 
-# Convocations
-ROLES_CONVOCATIONS_ID = 1357332996021293156
-CATEGORY_CONVOCATIONS_MAPPINGS = {
-    "Convocations": 1357005140934131876
-}
-MAX_CONVOCATIONS = 30
-
 # Whitelist -1H
 WL_RAPIDE_ROLE = 1342874195494699038
-WL1H_CHANNEL_ID = 1357782780863447080
+WL1H_CHANNEL_ID = 1363158220163780708
