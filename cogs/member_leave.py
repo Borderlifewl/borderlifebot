@@ -29,10 +29,14 @@ class MemberLeave(commands.Cog):
             embed.add_field(name="Pseudo sur le serveur", value=member.display_name, inline=False)
             embed.add_field(name="Création du compte", value=member.created_at.strftime('%d/%m/%Y à %H:%M:%S'), inline=False)
             paris_tz = pytz.timezone('Europe/Paris')
+            joined_at_paris = member.joined_at.astimezone(paris_tz) if member.joined_at else None
+            embed.add_field(name="Date d'arrivée", value=joined_at_paris.strftime('%d/%m/%Y à %H:%M:%S') if joined_at_paris else "Non disponible", inline=False)
             left_at_paris = datetime.now(paris_tz)
             embed.add_field(name="Date de départ du membre", value=left_at_paris.strftime('%d/%m/%Y à %H:%M:%S'), inline=False)
             embed.add_field(name="Discord du joueur", value=member.mention, inline=False)
-            embed.add_field(name="Admin", value="✅ Oui" if member.guild_permissions.administrator else "❌ Non", inline=False)
+            roles = [role.mention for role in member.roles if role != member.guild.default_role]
+            roles_str = ", ".join(roles) if roles else "Aucun rôle"
+            embed.add_field(name="Rôles", value=roles_str, inline=False)
             embed.add_field(name="Lien du profil", value=f"[Clique ici](https://discord.com/users/{member.id})", inline=False)
 
             embed.set_footer(text=f"Information du Joueur, pour toute erreur contacter un fondateur ou co-fondateur")
