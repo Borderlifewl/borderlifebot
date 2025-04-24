@@ -44,8 +44,6 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_any_role(ROLES_AUTORISES)
     async def ban(self, ctx, member_id: int, *, reason=None):
-        """Permet de bannir un membre en utilisant son identifiant, même s'il n'est plus sur le serveur."""
-    
         if member_id == ctx.author.id:
             await ctx.send("Vous ne pouvez pas vous bannir vous-même.", delete_after=5)
             return
@@ -126,10 +124,6 @@ class Moderation(commands.Cog):
         embed.add_field(name="Nombre total de warns", value=str(warn_count), inline=False)
         if log_channel:
             await log_channel.send(embed=embed)
-        if warn_count >= 3:
-            await member.ban(reason="Accumulation de 3 avertissements")
-            await log_channel.send(f"{member.mention} a été banni après avoir reçu 3 avertissements.")
-
 
     @commands.command()
     async def warn_del(self, ctx, member: discord.Member):
