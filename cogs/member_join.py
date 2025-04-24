@@ -31,7 +31,6 @@ class MemberJoin(commands.Cog):
             joined_at_paris = member.joined_at.astimezone(paris_tz)
             embed.add_field(name="Date d'arrivée sur le serveur", value=joined_at_paris.strftime('%d/%m/%Y à %H:%M:%S'), inline=False)
             embed.add_field(name="Discord du joueur", value=member.mention, inline=False)
-            embed.add_field(name="Admin", value="✅ Oui" if member.guild_permissions.administrator else "❌ Non", inline=False)
             embed.add_field(name="Lien du profil", value=f"[Clique ici](https://discord.com/users/{member.id})", inline=False)
 
             embed.set_footer(text=f"Information du Joueur, pour toute erreur contacter un fondateur ou co-fondateur")
