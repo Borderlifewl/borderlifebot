@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from discord.ui import View, Select, Modal, TextInput, Button
-from config import LOG_TICKET_CHANNEL_ID, CATEGORY_MAPPINGS, MAX_TICKETS, TICKET_ROLE_ID, STAFF_MANAGER, ILLEGAL_MANAGER, LEGAL_MANAGER, OWNER, PERM_3, MANAGER, ROLES_AUTORISES_RESET_TICKETS
+from config import LOG_TICKET_CHANNEL_ID, CATEGORY_MAPPINGS, MAX_TICKETS, TICKET_ROLE_ID, STAFF_MANAGER, ILLEGAL_MANAGER, LEGAL_MANAGER, OWNER, PERM_3, MANAGER, ROLES_AUTORISES_RESET_TICKETS, POLE_STAFF, POLE_ILLEGAL, POLE_LEGAL
 import sqlite3
 import os
 
@@ -109,13 +109,13 @@ class TicketReasonModal(Modal, title="Raison du ticket"):
         if self.category == "Besoin d'aide":
             allowed_roles = [TICKET_ROLE_ID]
         elif self.category == "Reprise Entreprise":
-            allowed_roles = [LEGAL_MANAGER, OWNER, PERM_3, MANAGER]
+            allowed_roles = [POLE_LEGAL, LEGAL_MANAGER, OWNER, PERM_3, MANAGER]
         elif self.category == "Reprise Groupe Criminel":
-            allowed_roles = [ILLEGAL_MANAGER, OWNER, PERM_3, MANAGER]
+            allowed_roles = [POLE_ILLEGAL, ILLEGAL_MANAGER, OWNER, PERM_3, MANAGER]
         elif self.category == "Glitch/Bug":
             allowed_roles = [TICKET_ROLE_ID]
         elif self.category == "Recrutement Staff":
-            allowed_roles = [STAFF_MANAGER, MANAGER, OWNER, PERM_3]    
+            allowed_roles = [POLE_STAFF, STAFF_MANAGER, MANAGER, OWNER, PERM_3]    
         elif self.category == "Demande de Wype":
             allowed_roles = [TICKET_ROLE_ID]
         elif self.category == "Dossier Mort RP":
