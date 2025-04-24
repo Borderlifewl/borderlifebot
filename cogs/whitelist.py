@@ -26,12 +26,12 @@ class Whitelist(commands.Cog):
     @commands.has_role(DOUANIER)
     async def openwl(self, ctx):
         nowhitelist = 1342864805559533659
-        if ctx.channel.id != 1342859770893172788:
+        if ctx.channel.id != 1363157993847521471:
             await ctx.send("Cette commande peut uniquement être exécutée dans un canal spécifique.", delete_after=5)
             return
         
         guild = ctx.guild
-        target_channel_id = 1342859770893172788
+        target_channel_id = 1363157993847521471
         channel = guild.get_channel(target_channel_id)
 
         if channel and isinstance(channel, discord.TextChannel):
@@ -51,12 +51,12 @@ class Whitelist(commands.Cog):
     @commands.has_role(DOUANIER)
     async def closewl(self, ctx):
         nowhitelist = 1342864805559533659
-        if ctx.channel.id != 1342859770893172788:
+        if ctx.channel.id != 1363157993847521471:
             await ctx.send("Cette commande peut uniquement être exécutée dans un canal spécifique.", delete_after=5)
             return
         
         guild = ctx.guild
-        target_channel_id = 1342859770893172788
+        target_channel_id = 1363157993847521471
         channel = guild.get_channel(target_channel_id)
 
         if channel and isinstance(channel, discord.TextChannel):
