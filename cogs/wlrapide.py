@@ -12,7 +12,7 @@ class WLrapide(commands.Cog):
     async def on_member_update(self, before, after):
         # Remplacez 'whitelist - de 1 heure' par le nom exact de votre rôle
         role_name = '・Whitelist -1H'
-        staff_channel_id = 1357782780863447080  # Remplacez par l'ID de votre canal staff
+        staff_channel_id = 1363158220163780708  # Remplacez par l'ID de votre canal staff
 
         # Vérifiez si le rôle a été ajouté
         if any(role.name == role_name for role in after.roles) and not any(role.name == role_name for role in before.roles):
