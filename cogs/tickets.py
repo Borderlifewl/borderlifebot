@@ -397,5 +397,36 @@ class Tickets(commands.Cog):
         else:
             await ctx.send("Cette commande peut seulement être utilisée dans un canal de ticket.")
 
+    @commands.command()
+    @commands.has_any_role(TICKET_ROLE_ID)
+    async def ticket_close(self, ctx, *, reason: str = "Aucune raison spécifiée"):
+        """Ferme un ticket manuellement avec une raison optionnelle."""
+        if ctx.channel.category and ctx.channel.category.id in CATEGORY_MAPPINGS.values():
+            # Enregistrer l'action dans les logs
+            opened_by = ticket_authors.get(ctx.channel.id)
+            await log_ticket_action("Fermeture (commande)", ctx.author, ctx.channel.name, reason=reason, opened_by=opened_by)
+
+            # Mettre à jour le compteur de tickets de l'utilisateur
+            user_id = ticket_authors.get(ctx.channel.id).id if ctx.channel.id in ticket_authors else None
+            if user_id and user_id in ticket_count:
+                ticket_count[user_id] = max(0, ticket_count.get(user_id, 0) - 1)
+
+            # Générer et envoyer le transcript
+            log_channel = discord.utils.get(ctx.guild.text_channels, id=LOG_TICKET_CHANNEL_ID)
+            if log_channel:
+                transcript_file = await generate_transcript(ctx.channel)
+                await log_channel.send(file=transcript_file)
+
+            # Supprimer l'auteur du ticket de la liste
+            if ctx.channel.id in ticket_authors:
+                del ticket_authors[ctx.channel.id]
+
+            # Supprimer le canal
+            await ctx.send("Le ticket sera fermé dans quelques secondes...")
+            await asyncio.sleep(3)
+            await ctx.channel.delete()
+        else:
+            await ctx.send("❌ Cette commande doit être utilisée dans un ticket.")
+
 async def setup(bot):
     await bot.add_cog(Tickets(bot))
